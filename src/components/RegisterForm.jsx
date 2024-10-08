@@ -1,10 +1,9 @@
-// src/RegisterForm.jsx
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import translations from "./translations";
 import districtsData from "./districtsData.json";
 import PropTypes from "prop-types";
-import def_prof from '../assets/user.png'
+import def_prof from '../assets/user.png';
 
 const engineeringBranches = [
   "Computer Engineering",
@@ -51,159 +50,134 @@ const RegisterForm = ({ language }) => {
   };
 
   return (
-    <>
-      <Container className="mt-2">
-        <h4>{translations[language].title}</h4>
+    <Container className="mt-2">
+      <h4>{translations[language].title}</h4>
 
-        {/* Image Preview */}
-        <div className="text-center mb-3">
-          {photo ? (
-            <img
-              src={photo}
-              alt="Uploaded"
-              className="rounded-circle"
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
-            />
-          ) : (
-            <img
-              src={def_prof} // Replace with your dummy image path
-              alt="Dummy"
-              className="rounded-circle"
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
-            />
-          )}
-        </div>
+      <div className="text-center mb-3">
+        {photo ? (
+          <img
+            src={photo}
+            alt="Uploaded"
+            className="rounded-circle"
+            style={{ width: "100px", height: "100px", objectFit: "cover" }}
+          />
+        ) : (
+          <img
+            src={def_prof}
+            alt="Dummy"
+            className="rounded-circle"
+            style={{ width: "100px", height: "100px", objectFit: "cover" }}
+          />
+        )}
+      </div>
 
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="photo" className="mb-3">
-            <Form.Label>{translations[language].uploadPhoto}</Form.Label>
+      <Form onSubmit={handleSubmit}>
+        <div className="row mb-3">
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
-              type="file"
-              accept="image/*"
-              onChange={handlePhotoChange}
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
               required
             />
-          </Form.Group>
-
-          {/* group 1 */}
-          <div className="">
-            <Form.Group controlId="name" className="mb-3">
-              <Form.Label>{translations[language].name}</Form.Label>
-              <Form.Control
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="email" className="mb-3">
-              <Form.Label>{translations[language].email}</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="address" className="mb-3">
-              <Form.Label>{translations[language].address}</Form.Label>
-              <Form.Control
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </Form.Group>
           </div>
-
-          {/* end of group 1 */}
-
-          <Form.Group controlId="phoneNumber" className="mb-3">
-            <Form.Label>{translations[language].phoneNumber}</Form.Label>
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+            <Form.Control
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="Phone"
               required
             />
-          </Form.Group>
+          </div>
+        </div>
 
-          <Form.Group controlId="district" className="mb-3">
-            <Form.Label>{translations[language].selectDistrict}</Form.Label>
-            <Form.Control
-              as="select"
-              value={district}
-              onChange={handleDistrictChange}
-              required
-            >
-              <option value=""></option>
-              {districtsData.map((dist) => (
-                <option key={dist.name} value={dist.name}>
-                  {dist.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
+        <Form.Group controlId="address" className="mb-3">
+          <Form.Control
+            as="textarea"
+            placeholder="Enter your address"
+            rows={3}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-          <Form.Group controlId="taluka" className="mb-3">
-            <Form.Label>{translations[language].selectTaluka}</Form.Label>
-            <Form.Control
-              as="select"
-              value={taluka}
-              onChange={(e) => setTaluka(e.target.value)}
-              required
-              disabled={!district}
-            >
-              <option value="">Choose...</option>
-              {district &&
-                districtsData
-                  .find((dist) => dist.name === district)
-                  .tahasil.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-            </Form.Control>
-          </Form.Group>
+        <div className="row mb-3">
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+            <Form.Group controlId="district">
+              <Form.Control
+                as="select"
+                value={district}
+                onChange={handleDistrictChange}
+                required
+              >
+                <option value="">{translations[language].selectDistrict}</option>
+                {districtsData.map((dist) => (
+                  <option key={dist.name} value={dist.name}>{dist.name}</option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </div>
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+            <Form.Group controlId="taluka">
+              <Form.Control
+                as="select"
+                value={taluka}
+                onChange={(e) => setTaluka(e.target.value)}
+                required
+                disabled={!district}
+              >
+                <option value="">Select Taluka</option>
+                {district && districtsData.find((dist) => dist.name === district).tahasil.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </div>
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+            <Form.Group controlId="branch">
+              <Form.Control
+                as="select"
+                value={branch}
+                onChange={(e) => setBranch(e.target.value)}
+                required
+              >
+                <option value="">{translations[language].selectBranch}</option>
+                {engineeringBranches.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </div>
+        </div>
 
-          {/* Branch Selection Field */}
-          <Form.Group controlId="branch" className="mb-3">
-            <Form.Label>{translations[language].selectBranch}</Form.Label>
-            <Form.Control
-              as="select"
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
-              required
-            >
-              <option value="">Choose...</option>
-              {engineeringBranches.map((b) => (
-                <option key={b} value={b}>
-                  {b}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
+        <Form.Group controlId="message" className="mb-3">
+          <Form.Control
+            as="textarea"
+            placeholder="Enter your message"
+            rows={5}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-          {/* Message Field */}
-          <Form.Group controlId="message" className="mb-3">
-            <Form.Label>{translations[language].message}</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            {translations[language].submit}
-          </Button>
-        </Form>
-      </Container>
-    </>
+        <Button variant="primary" type="submit">
+          {translations[language].submit}
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
