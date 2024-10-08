@@ -13,6 +13,7 @@ const engineeringBranches = [
   "Electrical Engineering",
   "Electronics Engineering",
   "Information Technology",
+  "AI&DS Engineering ",
 ];
 
 const RegisterForm = ({ language }) => {
@@ -137,7 +138,7 @@ const RegisterForm = ({ language }) => {
               onChange={handleDistrictChange}
               required
             >
-              <option value="">Choose...</option>
+              <option value=""></option>
               {districtsData.map((dist) => (
                 <option key={dist.name} value={dist.name}>
                   {dist.name}
