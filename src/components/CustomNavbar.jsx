@@ -1,5 +1,6 @@
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import translations from "./translations";
+import PropTypes from "prop-types";
 
 const CustomNavbar = ({ language, setLanguage }) => {
   return (
@@ -34,4 +35,9 @@ const CustomNavbar = ({ language, setLanguage }) => {
   );
 };
 
+
+CustomNavbar.propTypes = {
+  language: PropTypes.string,
+  setLanguage: PropTypes.string,
+};
 export default CustomNavbar;

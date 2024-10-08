@@ -14,6 +14,7 @@ const translations = {
     selectBranch: "Select Engineering Branch",
     message: "Message",
     submit: "Submit",
+    copyright: "NPSP All Rights Reserved.",
     alertMessage: (
       name,
       email,
@@ -40,6 +41,7 @@ const translations = {
     selectBranch: "इंजीनियरिंग शाखा चुनें",
     message: "संदेश",
     submit: "जमा करें",
+    copyright: "कॉपीराइट एनपीएसपी सर्वाधिकार सुरक्षित.",
     alertMessage: (
       name,
       email,
@@ -66,6 +68,7 @@ const translations = {
     selectBranch: "इंजीनियरिंग शाखा निवडा",
     message: "संदेश",
     submit: "सादर करा",
+    copyright: "कॉपीराइट एनपीएसपी सर्व हक्क राखीव.",
     alertMessage: (
       name,
       email,
