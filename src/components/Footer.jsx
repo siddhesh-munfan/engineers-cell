@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { GeoAlt,Telephone, Envelope } from 'react-bootstrap-icons';
 
 
-const Footer = ({ language, title, content }) => {
+const Footer = ({ language }) => {
   return (
     <>
       <div className="footer d-flex flex-row justify-content-evenly ">
