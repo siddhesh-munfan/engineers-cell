@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import CustomNavbar from "./components/CustomNavbar";
 import RegisterForm from "./components/RegisterForm"; // Your form component
 import PosterImage from "./components/PosterImage"; // Your poster image component
+import MapBox from "./components/MapBox";
 import Footer from "./components/Footer"; // Your footer component
 import { useState } from "react";
 
@@ -16,14 +17,13 @@ const App = () => {
       {/* Main Content */}
       <Container fluid className="mt-4">
         {/* Row for Form and Poster Image */}
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ flex: "1" }}>
+        <div className="row">
+          <div className="col">
             <RegisterForm language={language} />
           </div>
-
-          <div style={{ flex: "1" }}>
+          <div className="col">
             <PosterImage />
+            <MapBox />
           </div>
         </div>
       </Container>
