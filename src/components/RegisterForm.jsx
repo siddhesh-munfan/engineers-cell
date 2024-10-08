@@ -1,8 +1,7 @@
-// src/DistrictForm.js
-import  { useState } from "react";
+// src/RegisterForm.jsx
+import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import translations from "./translations";
-import CustomNavbar from "./CustomNavbar";
 import districtsData from "./districtsData.json"; // Adjust path as needed
 
 const engineeringBranches = [
@@ -10,11 +9,11 @@ const engineeringBranches = [
   "Mechanical Engineering",
   "Civil Engineering",
   "Electrical Engineering",
-  "E&TC Engineering",
+  "Electronics Engineering",
   "Information Technology",
 ];
 
-const RegisterForm = () => {
+const RegisterForm = ({ language }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -22,70 +21,104 @@ const RegisterForm = () => {
   const [district, setDistrict] = useState("");
   const [taluka, setTaluka] = useState("");
   const [branch, setBranch] = useState("");
+  const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState(null);
-  const [language, setLanguage] = useState("en");
 
   const handleDistrictChange = (e) => {
     setDistrict(e.target.value);
     setTaluka(""); // Reset taluka when district changes
   };
 
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhoto(reader.result); // Set the uploaded photo as the state
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(
-      `Name: ${name}\nEmail: ${email}\nAddress: ${address}\nPhone: ${phoneNumber}\nDistrict: ${district}\nTaluka: ${taluka}\nBranch: ${branch}`
+      `Name: ${name}\nEmail: ${email}\nAddress: ${address}\nPhone: ${phoneNumber}\nDistrict: ${district}\nTaluka: ${taluka}\nBranch: ${branch}\nMessage: ${message}`
     );
   };
 
   return (
     <>
-      <CustomNavbar language={language} setLanguage={setLanguage} />
-      <Container className="mt-5">
-        <h2>{translations[language].title}</h2>
+      <Container className="mt-2">
+        <h4>{translations[language].title}</h4>
+
+        {/* Image Preview */}
+        <div className="text-center mb-3">
+          {photo ? (
+            <img
+              src={photo}
+              alt="Uploaded"
+              className="rounded-circle"
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src="vite.svg" // Replace with your dummy image path
+              alt="Dummy"
+              className="rounded-circle"
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+          )}
+        </div>
 
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="photo" className="mb-3">
-            <Form.Label>Upload Photo</Form.Label>
+            <Form.Label>{translations[language].uploadPhoto}</Form.Label>
             <Form.Control
               type="file"
               accept="image/*"
-              onChange={(e) => setPhoto(e.target.files[0])}
+              onChange={handlePhotoChange}
               required
             />
           </Form.Group>
 
-          <Form.Group controlId="name" className="mb-3">
-            <Form.Label>{translations[language].name}</Form.Label>
-            <Form.Control
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Form.Group>
+          {/* group 1 */}
+          <div className="">
+            <Form.Group controlId="name" className="mb-3">
+              <Form.Label>{translations[language].name}</Form.Label>
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-          <Form.Group controlId="email" className="mb-3">
-            <Form.Label>{translations[language].email}</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form.Group controlId="email" className="mb-3">
+              <Form.Label>{translations[language].email}</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-          <Form.Group controlId="address" className="mb-3">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form.Group controlId="address" className="mb-3">
+              <Form.Label>{translations[language].address}</Form.Label>
+              <Form.Control
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </div>
+
+          {/* end of group 1 */}
 
           <Form.Group controlId="phoneNumber" className="mb-3">
-            <Form.Label>Phone Number</Form.Label>
+            <Form.Label>{translations[language].phoneNumber}</Form.Label>
             <Form.Control
               type="tel"
               value={phoneNumber}
@@ -132,8 +165,9 @@ const RegisterForm = () => {
             </Form.Control>
           </Form.Group>
 
+          {/* Branch Selection Field */}
           <Form.Group controlId="branch" className="mb-3">
-            <Form.Label>Engineering Branch</Form.Label>
+            <Form.Label>{translations[language].selectBranch}</Form.Label>
             <Form.Control
               as="select"
               value={branch}
@@ -147,6 +181,18 @@ const RegisterForm = () => {
                 </option>
               ))}
             </Form.Control>
+          </Form.Group>
+
+          {/* Message Field */}
+          <Form.Group controlId="message" className="mb-3">
+            <Form.Label>{translations[language].message}</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
           </Form.Group>
 
           <Button variant="primary" type="submit">
