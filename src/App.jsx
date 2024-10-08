@@ -29,7 +29,7 @@ const App = () => {
       </Container>
 
       {/* Footer */}
-      <Footer />
+      <Footer language={language} />
     </>
   );
 };

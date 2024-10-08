@@ -1,13 +1,23 @@
-import { Container } from "react-bootstrap";
+import translations from "./translations";
+import PropTypes from "prop-types";
 
-const Footer = () => {
+const Footer = ({ language  }) => {
   return (
-    <footer className="bg-light text-center py-3">
-      <Container>
-        <p>&copy; {new Date().getFullYear()} Your Company Name</p>
-      </Container>
+    <footer
+      style={{
+        backgroundColor: "#f1f1f1",
+        marginTop: "16px",
+        padding: "20px",
+        textAlign: "center",
+      }}
+    >
+      <p>&copy; {translations[language].copyright}</p>
+      
     </footer>
   );
+};
+Footer.propTypes = {
+  language: PropTypes.string,
 };
 
 export default Footer;

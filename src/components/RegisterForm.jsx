@@ -2,7 +2,9 @@
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import translations from "./translations";
-import districtsData from "./districtsData.json"; // Adjust path as needed
+import districtsData from "./districtsData.json";
+import PropTypes from "prop-types";
+
 
 const engineeringBranches = [
   "Computer Engineering",
@@ -202,6 +204,10 @@ const RegisterForm = ({ language }) => {
       </Container>
     </>
   );
+};
+
+RegisterForm.propTypes = {
+  language: PropTypes.string,
 };
 
 export default RegisterForm;
