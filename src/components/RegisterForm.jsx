@@ -2,9 +2,7 @@
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import translations from "./translations";
-import districtsData from "./districtsData.json";
-import PropTypes from "prop-types";
-import def_prof from '../assets/user.png'
+import districtsData from "./districtsData.json"; // Adjust path as needed
 
 const engineeringBranches = [
   "Computer Engineering",
@@ -13,7 +11,6 @@ const engineeringBranches = [
   "Electrical Engineering",
   "Electronics Engineering",
   "Information Technology",
-  "AI&DS Engineering ",
 ];
 
 const RegisterForm = ({ language }) => {
@@ -66,7 +63,7 @@ const RegisterForm = ({ language }) => {
             />
           ) : (
             <img
-              src={def_prof} // Replace with your dummy image path
+              src="vite.svg" // Replace with your dummy image path
               alt="Dummy"
               className="rounded-circle"
               style={{ width: "100px", height: "100px", objectFit: "cover" }}
@@ -132,44 +129,45 @@ const RegisterForm = ({ language }) => {
                 required
               />
           </Form.Group>
-
-          <Form.Group controlId="district" className="mb-3">
-            <Form.Label>{translations[language].selectDistrict}</Form.Label>
-            <Form.Control
-              as="select"
-              value={district}
-              onChange={handleDistrictChange}
-              required
-            >
-              <option value="">Choose...</option>
-              {districtsData.map((dist) => (
-                <option key={dist.name} value={dist.name}>
-                  {dist.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="taluka" className="mb-3">
-            <Form.Label>{translations[language].selectTaluka}</Form.Label>
-            <Form.Control
-              as="select"
-              value={taluka}
-              onChange={(e) => setTaluka(e.target.value)}
-              required
-              disabled={!district}
-            >
-              <option value="">Choose...</option>
-              {district &&
-                districtsData
-                  .find((dist) => dist.name === district)
-                  .tahasil.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-            </Form.Control>
-          </Form.Group>
+            
+          <div className="row">
+            <Form.Group controlId="district" className="mb-3 col">
+              {/* <Form.Label>{translations[language].selectDistrict}</Form.Label> */}
+              <Form.Control
+                as="select"
+                value={district}
+                onChange={handleDistrictChange}
+                required
+              >
+                <option value="">Select district</option>
+                {districtsData.map((dist) => (
+                  <option key={dist.name} value={dist.name}>
+                    {dist.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+        
+            <Form.Group controlId="taluka" className="mb-3 col">
+              {/* <Form.Label>{translations[language].selectTaluka}</Form.Label> */}
+              <Form.Control
+                as="select"
+                value={taluka}
+                onChange={(e) => setTaluka(e.target.value)}
+                required
+                disabled={!district}
+              >
+                <option value="">Select taluka</option>
+                {district &&
+                  districtsData
+                    .find((dist) => dist.name === district)
+                    .tahasil.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+              </Form.Control>
+            </Form.Group>
 
             {/* Branch Selection Field */}
             <Form.Group controlId="branch" className="mb-3 col">
@@ -208,10 +206,6 @@ const RegisterForm = ({ language }) => {
       </Container>
     </>
   );
-};
-
-RegisterForm.propTypes = {
-  language: PropTypes.string,
 };
 
 export default RegisterForm;
