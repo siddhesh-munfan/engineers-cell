@@ -18,10 +18,10 @@ const App = () => {
       <Container fluid className="mt-4">
         {/* Row for Form and Poster Image */}
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-7">
             <RegisterForm language={language} />
           </div>
-          <div className="col">
+          <div className="col-12 col-md-5">
             <PosterImage />
             <MapBox />
           </div>
