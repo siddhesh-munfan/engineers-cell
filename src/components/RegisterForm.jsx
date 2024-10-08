@@ -85,9 +85,10 @@ const RegisterForm = ({ language }) => {
           {/* group 1 */}
           <div className=" row">
             <Form.Group controlId="name" className="mb-3 col">
-              <Form.Label>{translations[language].name}</Form.Label>
+              {/* <Form.Label>{translations[language].name}</Form.Label> */}
               <Form.Control
                 type="text"
+                placeholder = "Enter name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -95,48 +96,50 @@ const RegisterForm = ({ language }) => {
             </Form.Group>
 
             <Form.Group controlId="email" className="mb-3 col">
-              <Form.Label>{translations[language].email}</Form.Label>
+              {/* <Form.Label>{translations[language].email}</Form.Label> */}
               <Form.Control
                 type="email"
+                placeholder = "Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </Form.Group>
 
-            <Form.Group controlId="address" className="mb-3 col">
-              <Form.Label>{translations[language].address}</Form.Label>
+            <Form.Group controlId="phoneNumber" className="mb-3 col">
+              {/* <Form.Label>{translations[language].phoneNumber}</Form.Label> */}
               <Form.Control
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                type="tel"
+                placeholder = "Enter phone number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               />
             </Form.Group>
           </div>
 
           {/* end of group 1 */}
-          
-          <div className="row">
-            <Form.Group controlId="phoneNumber" className="mb-3 col">
-              <Form.Label>{translations[language].phoneNumber}</Form.Label>
+          <Form.Group controlId="address" className="mb-3 col">
+              {/* <Form.Label>{translations[language].address}</Form.Label> */}
               <Form.Control
-                type="tel"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                type="text"
+                placeholder = "Enter address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 required
               />
-            </Form.Group>
-
+          </Form.Group>
+            
+          <div className="row">
             <Form.Group controlId="district" className="mb-3 col">
-              <Form.Label>{translations[language].selectDistrict}</Form.Label>
+              {/* <Form.Label>{translations[language].selectDistrict}</Form.Label> */}
               <Form.Control
                 as="select"
                 value={district}
                 onChange={handleDistrictChange}
                 required
               >
-                <option value="">Choose...</option>
+                <option value="">Select district</option>
                 {districtsData.map((dist) => (
                   <option key={dist.name} value={dist.name}>
                     {dist.name}
@@ -144,11 +147,9 @@ const RegisterForm = ({ language }) => {
                 ))}
               </Form.Control>
             </Form.Group>
-          </div>
-
-          
+        
             <Form.Group controlId="taluka" className="mb-3 col">
-              <Form.Label>{translations[language].selectTaluka}</Form.Label>
+              {/* <Form.Label>{translations[language].selectTaluka}</Form.Label> */}
               <Form.Control
                 as="select"
                 value={taluka}
@@ -156,7 +157,7 @@ const RegisterForm = ({ language }) => {
                 required
                 disabled={!district}
               >
-                <option value="">Choose...</option>
+                <option value="">Select taluka</option>
                 {district &&
                   districtsData
                     .find((dist) => dist.name === district)
@@ -170,14 +171,14 @@ const RegisterForm = ({ language }) => {
 
             {/* Branch Selection Field */}
             <Form.Group controlId="branch" className="mb-3 col">
-              <Form.Label>{translations[language].selectBranch}</Form.Label>
+              {/* <Form.Label>{translations[language].selectBranch}</Form.Label> */}
               <Form.Control
                 as="select"
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
                 required
               >
-                <option value="">Choose...</option>
+                <option value="">Select engineering branch</option>
                 {engineeringBranches.map((b) => (
                   <option key={b} value={b}>
                     {b}
@@ -185,7 +186,7 @@ const RegisterForm = ({ language }) => {
                 ))}
               </Form.Control>
             </Form.Group>
-
+          </div>
             {/* Message Field */}
             <Form.Group controlId="message" className="mb-3 col">
               <Form.Label>{translations[language].message}</Form.Label>
