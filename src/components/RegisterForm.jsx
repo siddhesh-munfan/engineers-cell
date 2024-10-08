@@ -4,7 +4,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import translations from "./translations";
 import districtsData from "./districtsData.json";
 import PropTypes from "prop-types";
-
+import def_prof from '../assets/user.png'
 
 const engineeringBranches = [
   "Computer Engineering",
@@ -65,7 +65,7 @@ const RegisterForm = ({ language }) => {
             />
           ) : (
             <img
-              src="vite.svg" // Replace with your dummy image path
+              src={def_prof} // Replace with your dummy image path
               alt="Dummy"
               className="rounded-circle"
               style={{ width: "100px", height: "100px", objectFit: "cover" }}
