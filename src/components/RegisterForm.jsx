@@ -52,36 +52,34 @@ const RegisterForm = ({ language }) => {
   return (
     <Container className="mt-2">
       <Form onSubmit={handleSubmit}>
-
         <div className="profileSection d-flex flex-column justify-content-center align-items-center">
+          <div className="text-center mb-3">
+            {photo ? (
+              <img
+                src={photo}
+                alt="Uploaded"
+                className="rounded-circle"
+                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              />
+            ) : (
+              <img
+                src={def_prof}
+                alt="Dummy"
+                className="rounded-circle"
+                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              />
+            )}
+          </div>
 
-        <div className="text-center mb-3">
-          {photo ? (
-            <img
-              src={photo}
-              alt="Uploaded"
-              className="rounded-circle"
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+          <Form.Group controlId="photo" className="mb-3 w-75">
+            <Form.Label>{translations[language].uploadPhoto}</Form.Label>
+            <Form.Control
+              type="file"
+              accept="image/*"
+              onChange={handlePhotoChange}
+              required
             />
-          ) : (
-            <img
-              src={def_prof}
-              alt="Dummy"
-              className="rounded-circle"
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
-            />
-          )}
-        </div>
-
-        <Form.Group controlId="photo" className="mb-3 w-75">
-          <Form.Label>{translations[language].uploadPhoto}</Form.Label>
-          <Form.Control
-            type="file"
-            accept="image/*"
-            onChange={handlePhotoChange}
-            required
-          />
-        </Form.Group>
+          </Form.Group>
         </div>
 
         <div className="row mb-3">
@@ -92,7 +90,7 @@ const RegisterForm = ({ language }) => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
+              placeholder={translations[language].name}
               required
             />
           </div>
@@ -103,7 +101,7 @@ const RegisterForm = ({ language }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder={translations[language].email}
               required
             />
           </div>
@@ -114,7 +112,7 @@ const RegisterForm = ({ language }) => {
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="Phone"
+              placeholder={translations[language].phoneNumber}
               required
             />
           </div>
@@ -123,7 +121,7 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="address" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder="Enter your address"
+            placeholder={translations[language].address}
             rows={3}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -164,7 +162,7 @@ const RegisterForm = ({ language }) => {
                 required
                 disabled={!district}
               >
-                <option value="">Select Taluka</option>
+                <option value="">{translations[language].selectTaluka}</option>
                 {district &&
                   districtsData
                     .find((dist) => dist.name === district)
@@ -200,7 +198,7 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="message" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder="Enter your message"
+            placeholder={translations[language].message}
             rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
