@@ -73,30 +73,36 @@ const RegisterForm = ({ language }) => {
 
       <Form onSubmit={handleSubmit}>
         <div className="row mb-3">
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
+              placeholder={translations[language].name}
               required
             />
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder={translations[language].email}
               required
             />
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="Phone"
+              placeholder={translations[language].phoneNumber}
               required
             />
           </div>
@@ -105,7 +111,7 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="address" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder="Enter your address"
+            placeholder={translations[language].address}
             rows={3}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -114,7 +120,9 @@ const RegisterForm = ({ language }) => {
         </Form.Group>
 
         <div className="row mb-3">
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="district">
               <Form.Control
                 as="select"
@@ -122,14 +130,20 @@ const RegisterForm = ({ language }) => {
                 onChange={handleDistrictChange}
                 required
               >
-                <option value="">{translations[language].selectDistrict}</option>
+                <option value="">
+                  {translations[language].selectDistrict}
+                </option>
                 {districtsData.map((dist) => (
-                  <option key={dist.name} value={dist.name}>{dist.name}</option>
+                  <option key={dist.name} value={dist.name}>
+                    {dist.name}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="taluka">
               <Form.Control
                 as="select"
@@ -138,14 +152,23 @@ const RegisterForm = ({ language }) => {
                 required
                 disabled={!district}
               >
-                <option value="">Select Taluka</option>
-                {district && districtsData.find((dist) => dist.name === district).tahasil.map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
+                <option value="">
+                  {translations[language].selectTaluka}
+                </option>
+                {district &&
+                  districtsData
+                    .find((dist) => dist.name === district)
+                    .tahasil.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="branch">
               <Form.Control
                 as="select"
@@ -155,7 +178,9 @@ const RegisterForm = ({ language }) => {
               >
                 <option value="">{translations[language].selectBranch}</option>
                 {engineeringBranches.map((b) => (
-                  <option key={b} value={b}>{b}</option>
+                  <option key={b} value={b}>
+                    {b}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -165,7 +190,7 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="message" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder="Enter your message"
+            placeholder={translations[language].message}
             rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}

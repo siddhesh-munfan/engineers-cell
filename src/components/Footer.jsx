@@ -5,8 +5,8 @@ import { GeoAlt,Telephone, Envelope } from 'react-bootstrap-icons';
 
 const Footer = ({ language }) => {
   return (
-    <>
-      <div className="footer d-flex flex-row justify-content-evenly ">
+    <div className="">
+      <div className="d-flex flex-row justify-content-evenly">
 
         <div className="footer-card p-2 text-center">
           <GeoAlt />
@@ -43,7 +43,7 @@ const Footer = ({ language }) => {
         <p>&copy; {translations[language].copyright}</p>
 
       </footer>
-    </>
+    </div>
 
   );
 };

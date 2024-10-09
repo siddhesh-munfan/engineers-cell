@@ -1,16 +1,16 @@
 import { Container } from "react-bootstrap";
 import CustomNavbar from "./components/CustomNavbar";
-import RegisterForm from "./components/RegisterForm"; // Your form component
-import PosterImage from "./components/PosterImage"; // Your poster image component
+import RegisterForm from "./components/RegisterForm";
+import PosterImage from "./components/PosterImage"; 
 import MapBox from "./components/MapBox";
-import Footer from "./components/Footer"; // Your footer component
+import Footer from "./components/Footer"; 
 import { useState } from "react";
 
 const App = () => {
   const [language, setLanguage] = useState("en");
 
   return (
-    <>
+    <div className="">
       {/* Navbar */}
       <CustomNavbar language={language} setLanguage={setLanguage} />
 
@@ -30,7 +30,7 @@ const App = () => {
 
       {/* Footer */}
       <Footer language={language} />
-    </>
+    </div>
   );
 };
 
