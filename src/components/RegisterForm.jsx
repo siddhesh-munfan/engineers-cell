@@ -51,7 +51,6 @@ const RegisterForm = ({ language }) => {
 
   return (
     <Container className="mt-2">
-      <h4>{translations[language].title}</h4>
 
       <div className="text-center mb-3">
         {photo ? (
@@ -90,7 +89,7 @@ const RegisterForm = ({ language }) => {
               placeholder="Email"
               required
             />
-          </div>
+          </div> 
           <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
               type="tel"
@@ -112,7 +111,7 @@ const RegisterForm = ({ language }) => {
             required
           />
         </Form.Group>
-
+        
         <div className="row mb-3">
           <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Group controlId="district">
