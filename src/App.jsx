@@ -14,9 +14,11 @@ const App = () => {
     <>
       {/* Navbar */}
       <CustomNavbar language={language} setLanguage={setLanguage} />
+
       {/* Main Content */}
-      <Container className="d-flex flex-column justify-content-center mt-4 text-center">
+      <Container fluid className="d-flex flex-column mt-4 text-center">
         <h4>{translations[language].title}</h4>
+
         <Container fluid className="mt-4">
           {/* Row for Form and Poster Image */}
           <div className="row">
@@ -29,7 +31,9 @@ const App = () => {
             </div>
           </div>
         </Container>
+
       </Container>
+
       {/* Footer */}
       <Footer language={language} />
     </>

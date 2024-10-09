@@ -31,16 +31,16 @@ const RegisterForm = ({ language }) => {
     setTaluka(""); // Reset taluka when district changes
   };
 
-  // const handlePhotoChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setPhoto(reader.result); // Set the uploaded photo as the state
-  //     };
-  //     reader.readAsDataURL(file); // Read the file as a data URL
-  //   }
-  // };
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhoto(reader.result); // Set the uploaded photo as the state
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,28 +51,43 @@ const RegisterForm = ({ language }) => {
 
   return (
     <Container className="mt-2">
-
-      <div className="text-center mb-3">
-        {photo ? (
-          <img
-            src={photo}
-            alt="Uploaded"
-            className="rounded-circle"
-            style={{ width: "100px", height: "100px", objectFit: "cover" }}
-          />
-        ) : (
-          <img
-            src={def_prof}
-            alt="Dummy"
-            className="rounded-circle"
-            style={{ width: "100px", height: "100px", objectFit: "cover" }}
-          />
-        )}
-      </div>
-
       <Form onSubmit={handleSubmit}>
+
+        <div className="profileSection d-flex flex-column justify-content-center align-items-center">
+
+        <div className="text-center mb-3">
+          {photo ? (
+            <img
+              src={photo}
+              alt="Uploaded"
+              className="rounded-circle"
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src={def_prof}
+              alt="Dummy"
+              className="rounded-circle"
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+          )}
+        </div>
+
+        <Form.Group controlId="photo" className="mb-3 w-75">
+          <Form.Label>{translations[language].uploadPhoto}</Form.Label>
+          <Form.Control
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoChange}
+            required
+          />
+        </Form.Group>
+        </div>
+
         <div className="row mb-3">
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="text"
               value={name}
@@ -81,7 +96,9 @@ const RegisterForm = ({ language }) => {
               required
             />
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="email"
               value={email}
@@ -89,8 +106,10 @@ const RegisterForm = ({ language }) => {
               placeholder="Email"
               required
             />
-          </div> 
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          </div>
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Control
               type="tel"
               value={phoneNumber}
@@ -111,9 +130,11 @@ const RegisterForm = ({ language }) => {
             required
           />
         </Form.Group>
-        
+
         <div className="row mb-3">
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="district">
               <Form.Control
                 as="select"
@@ -121,14 +142,20 @@ const RegisterForm = ({ language }) => {
                 onChange={handleDistrictChange}
                 required
               >
-                <option value="">{translations[language].selectDistrict}</option>
+                <option value="">
+                  {translations[language].selectDistrict}
+                </option>
                 {districtsData.map((dist) => (
-                  <option key={dist.name} value={dist.name}>{dist.name}</option>
+                  <option key={dist.name} value={dist.name}>
+                    {dist.name}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="taluka">
               <Form.Control
                 as="select"
@@ -138,13 +165,20 @@ const RegisterForm = ({ language }) => {
                 disabled={!district}
               >
                 <option value="">Select Taluka</option>
-                {district && districtsData.find((dist) => dist.name === district).tahasil.map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
+                {district &&
+                  districtsData
+                    .find((dist) => dist.name === district)
+                    .tahasil.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2">
+            {" "}
+            {/* Added margin-bottom */}
             <Form.Group controlId="branch">
               <Form.Control
                 as="select"
@@ -154,7 +188,9 @@ const RegisterForm = ({ language }) => {
               >
                 <option value="">{translations[language].selectBranch}</option>
                 {engineeringBranches.map((b) => (
-                  <option key={b} value={b}>{b}</option>
+                  <option key={b} value={b}>
+                    {b}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
