@@ -31,16 +31,16 @@ const RegisterForm = ({ language }) => {
     setTaluka(""); // Reset taluka when district changes
   };
 
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhoto(reader.result); // Set the uploaded photo as the state
-      };
-      reader.readAsDataURL(file); // Read the file as a data URL
-    }
-  };
+  // const handlePhotoChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPhoto(reader.result); // Set the uploaded photo as the state
+  //     };
+  //     reader.readAsDataURL(file); // Read the file as a data URL
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,6 @@ const RegisterForm = ({ language }) => {
 
   return (
     <Container className="mt-2">
-      <h4>{translations[language].title}</h4>
 
       <div className="text-center mb-3">
         {photo ? (
@@ -73,36 +72,30 @@ const RegisterForm = ({ language }) => {
 
       <Form onSubmit={handleSubmit}>
         <div className="row mb-3">
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder={translations[language].name}
+              placeholder="Name"
               required
             />
           </div>
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder={translations[language].email}
+              placeholder="Email"
               required
             />
-          </div>
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          </div> 
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Control
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder={translations[language].phoneNumber}
+              placeholder="Phone"
               required
             />
           </div>
@@ -111,18 +104,16 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="address" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder={translations[language].address}
+            placeholder="Enter your address"
             rows={3}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           />
         </Form.Group>
-
+        
         <div className="row mb-3">
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Group controlId="district">
               <Form.Control
                 as="select"
@@ -130,20 +121,14 @@ const RegisterForm = ({ language }) => {
                 onChange={handleDistrictChange}
                 required
               >
-                <option value="">
-                  {translations[language].selectDistrict}
-                </option>
+                <option value="">{translations[language].selectDistrict}</option>
                 {districtsData.map((dist) => (
-                  <option key={dist.name} value={dist.name}>
-                    {dist.name}
-                  </option>
+                  <option key={dist.name} value={dist.name}>{dist.name}</option>
                 ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Group controlId="taluka">
               <Form.Control
                 as="select"
@@ -152,23 +137,14 @@ const RegisterForm = ({ language }) => {
                 required
                 disabled={!district}
               >
-                <option value="">
-                  {translations[language].selectTaluka}
-                </option>
-                {district &&
-                  districtsData
-                    .find((dist) => dist.name === district)
-                    .tahasil.map((t) => (
-                      <option key={t} value={t}>
-                        {t}
-                      </option>
-                    ))}
+                <option value="">Select Taluka</option>
+                {district && districtsData.find((dist) => dist.name === district).tahasil.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-md-4 mb-2">
-            {" "}
-            {/* Added margin-bottom */}
+          <div className="col-md-4 mb-2"> {/* Added margin-bottom */}
             <Form.Group controlId="branch">
               <Form.Control
                 as="select"
@@ -178,9 +154,7 @@ const RegisterForm = ({ language }) => {
               >
                 <option value="">{translations[language].selectBranch}</option>
                 {engineeringBranches.map((b) => (
-                  <option key={b} value={b}>
-                    {b}
-                  </option>
+                  <option key={b} value={b}>{b}</option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -190,7 +164,7 @@ const RegisterForm = ({ language }) => {
         <Form.Group controlId="message" className="mb-3">
           <Form.Control
             as="textarea"
-            placeholder={translations[language].message}
+            placeholder="Enter your message"
             rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
